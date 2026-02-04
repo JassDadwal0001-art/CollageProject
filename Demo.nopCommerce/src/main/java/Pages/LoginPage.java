@@ -16,20 +16,14 @@ public class LoginPage {
 		}
 		
 		private By username = By.id("user-name");
-//		private By username1 = By.id("user-name");
 		private By password = By.id("password");
 		private By submit = By.id("login-button");
 		private By selectItem = By.xpath("//*[@id=\"item_4_title_link\"]/div");
+		private By errorMessage = By.cssSelector("[data-test='error']");
 		
 		public void enterUsername(String user)
 		{
 			driver.findElement(username).sendKeys(user);
-		}
-		
-		
-		public void wrongUsername(String user1)
-		{
-			driver.findElement(username).sendKeys(user1);
 		}
 		
 		public void enterPassword(String pass)
@@ -46,5 +40,19 @@ public class LoginPage {
 		public void selectItems()
 		{
 			driver.findElement(selectItem).click();
+		}
+		
+		public String getErrorMessage()
+		{
+			return driver.findElement(errorMessage).getText();
+		}
+		
+		public boolean isErrorMessageDisplayed()
+		{
+			try {
+				return driver.findElement(errorMessage).isDisplayed();
+			} catch (Exception e) {
+				return false;
+			}
 		}
 }
